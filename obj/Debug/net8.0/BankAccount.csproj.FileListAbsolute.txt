@@ -1,0 +1,14 @@
+/Users/nicoleavila/Documents/SYSTEMUTVECKLING/inlämningsuppgift/BankAccount/bin/Debug/net8.0/BankAccount
+/Users/nicoleavila/Documents/SYSTEMUTVECKLING/inlämningsuppgift/BankAccount/bin/Debug/net8.0/BankAccount.deps.json
+/Users/nicoleavila/Documents/SYSTEMUTVECKLING/inlämningsuppgift/BankAccount/bin/Debug/net8.0/BankAccount.runtimeconfig.json
+/Users/nicoleavila/Documents/SYSTEMUTVECKLING/inlämningsuppgift/BankAccount/bin/Debug/net8.0/BankAccount.dll
+/Users/nicoleavila/Documents/SYSTEMUTVECKLING/inlämningsuppgift/BankAccount/bin/Debug/net8.0/BankAccount.pdb
+/Users/nicoleavila/Documents/SYSTEMUTVECKLING/inlämningsuppgift/BankAccount/obj/Debug/net8.0/BankAccount.GeneratedMSBuildEditorConfig.editorconfig
+/Users/nicoleavila/Documents/SYSTEMUTVECKLING/inlämningsuppgift/BankAccount/obj/Debug/net8.0/BankAccount.AssemblyInfoInputs.cache
+/Users/nicoleavila/Documents/SYSTEMUTVECKLING/inlämningsuppgift/BankAccount/obj/Debug/net8.0/BankAccount.AssemblyInfo.cs
+/Users/nicoleavila/Documents/SYSTEMUTVECKLING/inlämningsuppgift/BankAccount/obj/Debug/net8.0/BankAccount.csproj.CoreCompileInputs.cache
+/Users/nicoleavila/Documents/SYSTEMUTVECKLING/inlämningsuppgift/BankAccount/obj/Debug/net8.0/BankAccount.dll
+/Users/nicoleavila/Documents/SYSTEMUTVECKLING/inlämningsuppgift/BankAccount/obj/Debug/net8.0/refint/BankAccount.dll
+/Users/nicoleavila/Documents/SYSTEMUTVECKLING/inlämningsuppgift/BankAccount/obj/Debug/net8.0/BankAccount.pdb
+/Users/nicoleavila/Documents/SYSTEMUTVECKLING/inlämningsuppgift/BankAccount/obj/Debug/net8.0/BankAccount.genruntimeconfig.cache
+/Users/nicoleavila/Documents/SYSTEMUTVECKLING/inlämningsuppgift/BankAccount/obj/Debug/net8.0/ref/BankAccount.dll
