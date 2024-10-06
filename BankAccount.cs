@@ -19,13 +19,11 @@ namespace BankAccount
     }
 
 
-    public class PersonalAccount : BankAccount
+    public class PersonalAccount : BankAccount 
     {
-        public PersonalAccount(string accountNumber, string accountHolder, int balance) : base(accountNumber, accountHolder, balance)
+        public PersonalAccount(string accountNumber, string accountHolder, int balance) 
+        : base(accountNumber, accountHolder, balance)
         {
-        //     this.AccountNumber = accountNumber;
-        //     this.AccountHolder = accountHolder;
-        //    this.Balance = balance;
         }
 
         public override void UserDeposit(int amount) //Metod för insättning
@@ -47,13 +45,12 @@ namespace BankAccount
         }
     }
 
+
     public class SavingsAccount : BankAccount
     {
-        public SavingsAccount(string accountNumber, string accountHolder, int balance) : base(accountNumber, accountHolder, balance)
+        public SavingsAccount(string accountNumber, string accountHolder, int balance) 
+        : base(accountNumber, accountHolder, balance)
         {
-            // AccountNumber = accountNumber;
-            // AccountHolder = accountHolder;
-            // Balance = balance;
         }
 
         public override void UserDeposit(int amount)
@@ -99,5 +96,4 @@ namespace BankAccount
             return true;
         }
     }
-
-} //End of namespace BankAccount   
+}

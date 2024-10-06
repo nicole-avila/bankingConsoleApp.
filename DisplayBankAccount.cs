@@ -37,11 +37,11 @@ namespace BankAccount
                     UserTransfer(); // Metod för överföring
                     break;
                 case 5:
-                    Console.WriteLine("Exit");
+                    Console.WriteLine("Exit"); // Avsluta programmet
                     running = false;
                     break;
                 default:
-                    Console.WriteLine("Felaktigt val, försök igen.");
+                    Console.WriteLine("Felaktigt val, försök igen."); //Felmeddelande om användaren väljer ett ogiltigt alternativ
                     break;
             }
             System.Console.WriteLine("Vill du fortsätta? (J/N)");
@@ -208,11 +208,11 @@ namespace BankAccount
             if (fromAccount.UserWithdraw(amountInt))
             {
                 toAccount.UserDeposit(amountInt);
-                Console.WriteLine($"Överförde {amountInt} SEK från konto {fromAccountNumber} till konto {toAccountNumber}.");
+                Console.WriteLine($"Överförde {amountInt} SEK från konto nr: {fromAccountNumber} till konto nr: {toAccountNumber}.");
             }
             else
             {
-                Console.WriteLine("Otillräckligt saldo för att genomföra överföringen.");
+                Console.WriteLine("Otillräckligt saldo för att genomföra överföringen!");
             }
         }
         else
@@ -224,11 +224,11 @@ namespace BankAccount
 
     private BankAccount GetAccountByNumber(string accountNumber)     //Metod för att hämta konto med kontonummer
     {
-        if (accountNumber == personalAccount.AccountNumber)   //Om kontonumret är lika med personkontots kontonummer
+        if (accountNumber == personalAccount.AccountNumber)         //Om kontonumret är lika med personkontots kontonummer
         {
             return personalAccount;
         }
-        else if (accountNumber == savingsAccount.AccountNumber) //Om kontonumret är lika med sparkontots kontonummer
+        else if (accountNumber == savingsAccount.AccountNumber)     //Om kontonumret är lika med sparkontots kontonummer
         {
             return savingsAccount;
         }
@@ -242,10 +242,8 @@ namespace BankAccount
             //Jag får varning för att jag inte returnerar något värde. Är lite osäker på hur jag ska lösa det, tar gärna feedback på hur jag borde/bör göra det annars.
             //Min själ tixar för att det visar varning, och gult!!
         }
-
     }
-
-    } //End of DisplayBankAccount!!
+    }
 }
 
 
