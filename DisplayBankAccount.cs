@@ -2,8 +2,9 @@ namespace BankAccount
 {
     public class DisplayBankAccount
     {
-        PersonalAccount personalAccount = new PersonalAccount("123456789", "Kalle Anka", 1000);
-
+        PersonalAccount personalAccount = new PersonalAccount("111", "Kalle Anka", 1000);
+        SavingsAccount savingsAccount = new SavingsAccount("222", "Kalle Anka", 2000);
+        InvestmentAccount investmentAccount = new InvestmentAccount("333", "Kalle Anka", 3000);
 
     public void Run()  //Metod som håller applikationen igång och behandlar användarens val
     {
@@ -71,10 +72,10 @@ namespace BankAccount
             }
             else
             {
-                Console.WriteLine("Finns inget konto med det kontonumret. Vänligen försök igen.");
+                Console.WriteLine("Finns inget konto med det kontonumret. Vänligen försök igen!");
             }
         }
-         Console.WriteLine($"Saldot för kontohavaren, {account.AccountHolder} med kontonummret, {accountNumber}: {account.Balance} SEK");
+         Console.WriteLine($"Saldot för kontohavaren, {account.AccountHolder} med kontonummret, {accountNumber} har: {account.Balance} SEK");
     }
 
 
@@ -110,11 +111,11 @@ namespace BankAccount
         if (amountInt > 0)
         { 
             account.UserDeposit(amountInt); //Utför insättningen
-            Console.WriteLine($"Insättning av {amountInt}SEK är genomförd.");
+            Console.WriteLine($"Insättning av {amountInt} SEK är genomförd!");
         }
         else
         {
-            Console.WriteLine("Ogiltigt belopp.");
+            Console.WriteLine("Ogiltigt belopp!");
         }     
     }
 
@@ -138,7 +139,7 @@ namespace BankAccount
                     }
                     else
                     {
-                        Console.WriteLine("Finns inget konto med det kontonumret. Vänligen försök igen."); 
+                        Console.WriteLine("Finns inget konto med det kontonumret. Vänligen försök igen!"); 
                     }
             }
     
@@ -149,11 +150,11 @@ namespace BankAccount
             if (amountInt > 0)
             { 
                 account.UserWithdraw(amountInt);
-                Console.WriteLine($"Ditt uttag av {amountInt}SEK är genomförd.");
+                Console.WriteLine($"Ditt uttag av {amountInt} SEK är genomförd!");
             }
             else
             {
-                Console.WriteLine("Ogiltigt belopp.");
+                Console.WriteLine("Ogiltigt belopp!");
             }     
     }
 
@@ -178,7 +179,7 @@ namespace BankAccount
                     }
                     else
                     {
-                        Console.WriteLine("Finns inget konto med det kontonumret. Vänligen försök igen."); 
+                        Console.WriteLine("Finns inget konto med det kontonumret. Vänligen försök igen!"); 
                     }
             }
 
@@ -194,7 +195,7 @@ namespace BankAccount
                 }
                 else
                 {
-                    Console.WriteLine("Finns inget konto med det kontonumret. Vänligen försök igen.");
+                    Console.WriteLine("Finns inget konto med det kontonumret. Vänligen försök igen!");
                 }
             }
     
@@ -207,33 +208,44 @@ namespace BankAccount
             if (fromAccount.UserWithdraw(amountInt))
             {
                 toAccount.UserDeposit(amountInt);
-                Console.WriteLine($"Överförde {amountInt}SEK från konto {fromAccountNumber} till konto {toAccountNumber}.");
+                Console.WriteLine($"Överförde {amountInt} SEK från konto {fromAccountNumber} till konto {toAccountNumber}.");
             }
             else
             {
-                Console.WriteLine("Otillräckliga medel i dittt konto.");
+                Console.WriteLine("Otillräckligt saldo för att genomföra överföringen.");
             }
         }
         else
         {
-            Console.WriteLine("Ogiltigt belopp.");
+            Console.WriteLine("Ogiltigt belopp!");
         }   
     }
 
 
     private BankAccount GetAccountByNumber(string accountNumber)     //Metod för att hämta konto med kontonummer
     {
-        if (accountNumber == personalAccount.AccountNumber)     //Kontrollera om det angivna kontonumret matchar det personliga kontot
+        if (accountNumber == personalAccount.AccountNumber)   //Om kontonumret är lika med personkontots kontonummer
         {
             return personalAccount;
         }
+        else if (accountNumber == savingsAccount.AccountNumber) //Om kontonumret är lika med sparkontots kontonummer
+        {
+            return savingsAccount;
+        }
+        else if (accountNumber == investmentAccount.AccountNumber)  //Om kontonumret är lika med investeringskontots kontonummer
+        {
+            return investmentAccount;
+        }
         else
         {
-            return null; // Om inget konto hittades, returnera null
+            return null;
+            //Jag får varning för att jag inte returnerar något värde. Är lite osäker på hur jag ska lösa det, tar gärna feedback på hur jag borde/bör göra det annars.
+            //Min själ tixar för att det visar varning, och gult!!
         }
+
     }
-
-
 
     } //End of DisplayBankAccount!!
 }
+
+
