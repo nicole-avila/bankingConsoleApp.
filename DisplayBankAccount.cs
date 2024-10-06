@@ -5,7 +5,7 @@ namespace BankAccount
         PersonalAccount personalAccount = new PersonalAccount("123456789", "Kalle Anka", 1000);
 
 
-    public void Run()  // Metod som håller applikationen igång och behandlar användarens val
+    public void Run()  //Metod som håller applikationen igång och behandlar användarens val
     {
         bool running = true;
         while (running)
@@ -24,10 +24,10 @@ namespace BankAccount
             switch (userInputChoiceInt)
             {
                 case 1:
-                    Deposit(); // Metod för insättning
+                    UserDeposit(); // Metod för insättning
                     break;
                 case 2:
-                    Console.WriteLine("Withdraw");
+                    UserWithdraw(); // Metod för uttag
                     break;
                 case 3:
                     Console.WriteLine("Transfer");
@@ -46,19 +46,19 @@ namespace BankAccount
         }
     }
 
-    private void Deposit()
+    private void UserDeposit()  //Metod för att hantera insättningar
     {
         Console.WriteLine("--Insättning--");
         string accountNumber;
         BankAccount? account; 
 
-    //En while loop för att ge användaren möjlighet att ange ett giltigt kontonummer utan att bli utkastad vid första felförsöket
-    while (true)
-    {
-        Console.Write("Ange kontonummer: ");
-        accountNumber = Console.ReadLine()!; 
-       
-        account = GetAccountByNumber(accountNumber);   //hämta kontot baserat på kontonumret
+        //En while loop för att ge användaren möjlighet att ange ett giltigt kontonummer utan att bli utkastad vid första felförsöket
+        while (true)
+        {
+            Console.Write("Ange kontonummer: ");
+            accountNumber = Console.ReadLine()!; 
+        
+            account = GetAccountByNumber(accountNumber);   //hämta kontot baserat på kontonumret
 
             if (account != null) //Om *account* inte är LIKA MED Null, alltså om det finns ett konto med det kontonumret
             {
@@ -68,7 +68,7 @@ namespace BankAccount
             {
                 Console.WriteLine("Finns inget konto med det kontonumret. Vänligen försök igen."); //Meddelande om felaktigt kontonummer
             }
-    }
+        }
     
         Console.Write("Ange belopp som ska sättas in: ");     //läs in beloppet som ska sättas in
         string amount = Console.ReadLine()!;
@@ -78,53 +78,67 @@ namespace BankAccount
         //HÄR ska insättningen göras
         if (amountInt > 0)
         { 
-            account.Deposit(amountInt); //Utför insättningen
-            Console.WriteLine($"Insättning av {amountInt} kr genomförd.");
+            account.UserDeposit(amountInt); //Utför insättningen
+            Console.WriteLine($"Insättning av {amountInt}SEK är genomförd.");
         }
         else
         {
             Console.WriteLine("Ogiltigt belopp.");
         }     
     }
-        //Metod för att hämta konto med kontonummer
-        private BankAccount GetAccountByNumber(string accountNumber)
-        {
-            if (accountNumber == personalAccount.AccountNumber) //Kontrollera om det angivna kontonumret matchar det personliga kontot
+
+    
+    private void UserWithdraw()   // Metod för att hantera uttag
+    {
+        Console.WriteLine("--Uttag--");
+        string accountNumber;
+        BankAccount? account; 
+
+        while (true)
             {
-                return personalAccount;
+                Console.Write("Ange kontonummer: ");
+                accountNumber = Console.ReadLine()!; 
+            
+                account = GetAccountByNumber(accountNumber);   
+
+                    if (account != null) 
+                    {
+                        break; 
+                    }
+                    else
+                    {
+                        Console.WriteLine("Finns inget konto med det kontonumret. Vänligen försök igen."); 
+                    }
+            }
+    
+        Console.Write("Ange belopp som ska tas ut: ");   
+        string amount = Console.ReadLine()!;
+        int amountInt = int.Parse(amount);    
+   
+            if (amountInt > 0)
+            { 
+                account.UserWithdraw(amountInt);
+                Console.WriteLine($"Ditt uttag av {amountInt}SEK är genomförd.");
             }
             else
             {
-                return null; // Om inget konto hittades, returnera null
+                Console.WriteLine("Ogiltigt belopp.");
+            }     
+    }
+
+    //Metod för att hämta konto med kontonummer
+    private BankAccount GetAccountByNumber(string accountNumber)
+    {
+        if (accountNumber == personalAccount.AccountNumber) //Kontrollera om det angivna kontonumret matchar det personliga kontot
+        {
+            return personalAccount;
+        }
+        else
+        {
+            return null; // Om inget konto hittades, returnera null
         }
     }
-    }
+
+
+    } //End of DisplayBankAccount!!
 }
-
-
-    // Console.Write("Ange kontonummer: ");
-
-    //     string accountNumber = Console.ReadLine()!;
-    //     Console.Write("Ange belopp som ska sättas in: ");
-
-    //     string amount = Console.ReadLine()!;
-    //     int amountInt = int.Parse(amount);
-
-    //  //Här ska insättningen göras
-    //     if(amountInt > 0)
-    //     { 
-    //        BankAccount? account = GetAccountByNumber(accountNumber); //Hämtar konto(!) baserat på kontonummer
-    //         if (account != null) //Om *account* inte är LIKA MED Null, alltså om det finns ett konto med det kontonumret
-    //         {
-    //             account.Deposit(amountInt); //Utför insättningen
-    //              Console.WriteLine($"Insättning av {amountInt} kr genomförd.");
-    //         }
-    //         else
-    //         {
-    //             Console.WriteLine("Finns inget konto med det kontonumret.");    
-    //         }
-    //     }
-    //     else
-    //     {
-    //         Console.WriteLine("Ogiltigt belopp.");
-    //     }

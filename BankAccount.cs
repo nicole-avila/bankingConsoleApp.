@@ -15,8 +15,8 @@ public abstract class BankAccount
     }
 
     //Abstrakta metoder för insättning och uttag
-    public abstract void Deposit(int amount); 
-    public abstract bool Withdraw(int amount);
+    public abstract void UserDeposit(int amount); 
+    public abstract bool UserWithdraw(int amount);
 }
 
 public class PersonalAccount : BankAccount
@@ -29,14 +29,14 @@ public class PersonalAccount : BankAccount
     }
 
     //Metod för insättning
-    public override void Deposit(int amount)
+    public override void UserDeposit(int amount)
     {
         Balance += (int)amount;
         Console.WriteLine($"Du har gjort en insättning på: {amount}SEK till {AccountHolder}'s person konto.");
     }
 
     //Metod för uttag
-    public override bool Withdraw(int amount)
+    public override bool UserWithdraw(int amount)
     {
        if (amount > Balance)
         {
