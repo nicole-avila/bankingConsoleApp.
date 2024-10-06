@@ -11,10 +11,10 @@ namespace BankAccount
         while (running)
         {
             Console.WriteLine("\nBank System Meny:");
-            Console.WriteLine("1. Insättning");
-            Console.WriteLine("2. Uttag");
-            Console.WriteLine("3. Överföring");
-            Console.WriteLine("4. Kolla saldo");
+            Console.WriteLine("1. Kolla saldo");
+            Console.WriteLine("2. Insättning");
+            Console.WriteLine("3. Uttag");
+            Console.WriteLine("4. Överföring");
             Console.WriteLine("5. Exit/Avsluta");
             Console.Write("Select an option: ");
 
@@ -24,16 +24,16 @@ namespace BankAccount
             switch (userInputChoiceInt)
             {
                 case 1:
-                    UserDeposit(); // Metod för insättning
+                    CheckBalance(); // Metod för att kolla saldo
                     break;
                 case 2:
-                    UserWithdraw(); // Metod för uttag
+                    UserDeposit(); // Metod för insättning
                     break;
                 case 3:
-                    Console.WriteLine("Transfer");
+                    UserWithdraw(); // Metod för uttag
                     break;
                 case 4:
-                    Console.WriteLine("Check Balance");
+                    UserTransfer(); // Metod för överföring
                     break;
                 case 5:
                     Console.WriteLine("Exit");
@@ -43,8 +43,40 @@ namespace BankAccount
                     Console.WriteLine("Felaktigt val, försök igen.");
                     break;
             }
+            System.Console.WriteLine("Vill du fortsätta? (J/N)");
+            string continueChoice = Console.ReadLine()!;
+            if (continueChoice.ToUpper() == "N")
+            {
+                running = false;
+            }           
         }
     }
+
+    private void CheckBalance() //Metod för att kolla saldo
+    {
+        Console.WriteLine("--Kolla saldo--");
+        string accountNumber;
+        BankAccount? account; 
+
+        while (true)       //En while loop för att ge användaren möjlighet att ange ett giltigt kontonummer utan att bli utkastad vid första felförsöket.
+        {
+            Console.Write("Ange kontonummer: ");
+            accountNumber = Console.ReadLine()!; 
+        
+            account = GetAccountByNumber(accountNumber);   //hämta kontot baserat på kontonumret
+
+            if (account != null)    //Om *account* inte är LIKA MED Null, alltså om det finns ett konto med det kontonumret
+            {
+                break;  //kontot har hittats, och bryts ut ur loopen
+            }
+            else
+            {
+                Console.WriteLine("Finns inget konto med det kontonumret. Vänligen försök igen.");
+            }
+        }
+         Console.WriteLine($"Saldot för kontohavaren, {account.AccountHolder} med kontonummret, {accountNumber}: {account.Balance} SEK");
+    }
+
 
     private void UserDeposit()  //Metod för att hantera insättningar
     {
@@ -52,7 +84,6 @@ namespace BankAccount
         string accountNumber;
         BankAccount? account; 
 
-        //En while loop för att ge användaren möjlighet att ange ett giltigt kontonummer utan att bli utkastad vid första felförsöket
         while (true)
         {
             Console.Write("Ange kontonummer: ");
@@ -75,7 +106,7 @@ namespace BankAccount
         
         int amountInt = int.Parse(amount);     //Konvertera beloppet till ett heltal
 
-        //HÄR ska insättningen göras
+        //HÄR görs insättningen
         if (amountInt > 0)
         { 
             account.UserDeposit(amountInt); //Utför insättningen
@@ -126,10 +157,73 @@ namespace BankAccount
             }     
     }
 
-    //Metod för att hämta konto med kontonummer
-    private BankAccount GetAccountByNumber(string accountNumber)
+
+    private void UserTransfer()     //Metod för att hantera överföringar
     {
-        if (accountNumber == personalAccount.AccountNumber) //Kontrollera om det angivna kontonumret matchar det personliga kontot
+        Console.WriteLine("--Överföring--");
+        string fromAccountNumber;
+        string toAccountNumber;
+        BankAccount? fromAccount;
+        BankAccount? toAccount;
+
+        while (true) //hämta avsändarens konto  
+            {
+            Console.Write("Ange avsändarens kontonummer: ");
+            fromAccountNumber = Console.ReadLine()!;
+            fromAccount = GetAccountByNumber(fromAccountNumber);
+
+                    if (fromAccount != null) 
+                    {
+                        break; 
+                    }
+                    else
+                    {
+                        Console.WriteLine("Finns inget konto med det kontonumret. Vänligen försök igen."); 
+                    }
+            }
+
+         while (true)  //hämta mottagarens konto
+            {
+                Console.Write("Ange mottagarens kontonummer: ");
+                toAccountNumber = Console.ReadLine()!;
+                toAccount = GetAccountByNumber(toAccountNumber);
+
+                if (toAccount != null)
+                {
+                    break;
+                }
+                else
+                {
+                    Console.WriteLine("Finns inget konto med det kontonumret. Vänligen försök igen.");
+                }
+            }
+    
+        Console.Write("Ange belopp som ska överföras: ");   
+        string amountInput = Console.ReadLine()!;
+        int amountInt = int.Parse(amountInput);    
+   
+        if (amountInt > 0)
+        { 
+            if (fromAccount.UserWithdraw(amountInt))
+            {
+                toAccount.UserDeposit(amountInt);
+                Console.WriteLine($"Överförde {amountInt}SEK från konto {fromAccountNumber} till konto {toAccountNumber}.");
+            }
+            else
+            {
+                Console.WriteLine("Otillräckliga medel i dittt konto.");
+            }
+        }
+        else
+        {
+            Console.WriteLine("Ogiltigt belopp.");
+        }   
+    }
+
+
+    private BankAccount GetAccountByNumber(string accountNumber)     //Metod för att hämta konto med kontonummer
+    {
+        if (accountNumber == personalAccount.AccountNumber)     //Kontrollera om det angivna kontonumret matchar det personliga kontot
         {
             return personalAccount;
         }
@@ -138,6 +232,7 @@ namespace BankAccount
             return null; // Om inget konto hittades, returnera null
         }
     }
+
 
 
     } //End of DisplayBankAccount!!

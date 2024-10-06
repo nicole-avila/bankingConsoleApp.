@@ -47,5 +47,13 @@ public class PersonalAccount : BankAccount
         Console.WriteLine($"Du har tagit ut: {amount}SEK från {AccountHolder}'s person konto.");
         return true;
     }
-}
+
+
+
+
+
+
+
+
+    } //End of PersonalAccount
 }
