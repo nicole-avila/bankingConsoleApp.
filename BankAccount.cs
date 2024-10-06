@@ -48,15 +48,4 @@ public class PersonalAccount : BankAccount
         return true;
     }
 }
-
-
-// public class SavingsAccount : BankAccount
-// {
-    
-// }
-
-// public class InvestmentAccount : BankAccount
-// {
-    
-// }    
 }
